@@ -63,9 +63,14 @@ public class PersonRestController {
        return person;
     }
     
-     @RequestMapping("/first_name/{name}")
-    public List<Person> getPersonByName (@PathVariable String name){
+    @RequestMapping("/first_name/{name}")
+    public List<Person> getPersonByFirstName (@PathVariable String name){
         return personRepository.findByFirstNameIgnoreCase(name);
+    }
+    
+    @RequestMapping("/years/{years}")
+    public List<Person> getPersonByName (@PathVariable String years){
+        return personRepository.findByYears(Integer.parseInt(years));
     }
     
      @RequestMapping("/last_name/{last_name}")

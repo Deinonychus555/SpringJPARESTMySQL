@@ -46,6 +46,9 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
         List<Person> findByFirstNameAndPetsName(@Param("firstName") String firstName, @Param("name") String name);
        
          List<Person> findByFirstNameAndAge(@Param("firstName")String firstName, @Param("age") int age);
+         
+         @Query("select u from Person u where u.age < ?1")
+         List<Person> findByYears(int years);
         
         
         
