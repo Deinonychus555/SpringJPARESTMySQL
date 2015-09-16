@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jparest.main;
+package com.jparest.controller;
 
+import com.jparest.repository.UserNotFoundException;
+import com.jparest.domain.Animal;
+import com.jparest.domain.Person;
+import com.jparest.repository.PersonRepository;
+import com.jparest.repository.AnimalRepository;
 import com.jparest.*;
-import com.jparest.main.*;
 import java.util.List;
 import java.util.Optional;
 

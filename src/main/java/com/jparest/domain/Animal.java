@@ -1,6 +1,5 @@
-package com.jparest.main;
+package com.jparest.domain;
 
-import com.jparest.main.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +14,12 @@ import javax.persistence.Column;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+
+// ¡¡IMPORTANTE!!: Al mapear el nombre de la tabla y las columnas, las mayúsculas se ignoran y 
+// se convierten a minúsculas y convierte la convención de nombre 'camelCase' a separar por '_'
+// Ejemplo: FirstName -> first_name
+
+
 //@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name="animals")
@@ -24,7 +29,7 @@ public class Animal {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name = "animal_id")
+        @Column(name = "animal_id",unique = true, nullable = false)
 	private long id; 
         
         @Column(name = "id")
@@ -44,7 +49,7 @@ public class Animal {
         @ManyToOne(cascade = CascadeType.ALL, optional = false)
         @JoinColumn(name = "person_id")
         */
-        @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE} )
+        @ManyToMany(mappedBy="pets",cascade={CascadeType.PERSIST, CascadeType.MERGE} )
         private List<Person> owners=new ArrayList<Person>();
         
         // ¡¡ Si implementas un constructor tienes que implementar el de defecto !!

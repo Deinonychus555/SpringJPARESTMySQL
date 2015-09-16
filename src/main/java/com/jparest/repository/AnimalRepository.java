@@ -1,6 +1,7 @@
-package com.jparest.main;
+package com.jparest.repository;
 
-import com.jparest.main.Animal;
+import com.jparest.domain.Animal;
+import com.jparest.domain.Animal;
 import java.util.List;
 import java.util.Optional;
 

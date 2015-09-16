@@ -1,3 +1,4 @@
+
 /*
 Accessing JPA Data with REST
 
@@ -12,7 +13,15 @@ Spring HATEOAS and Spring Data JPA and combines them together automatically.
 
 */
 
-package com.jparest.main;
+
+package com.jparest;
+
+import com.jparest.domain.Animal;
+import com.jparest.domain.Customer;
+import com.jparest.domain.Person;
+import com.jparest.repository.PersonRepository;
+import com.jparest.repository.AnimalRepository;
+import com.jparest.repository.CustomerRepository;
 
 import java.util.Arrays;
 import org.springframework.boot.CommandLineRunner;
@@ -27,8 +36,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
-@ComponentScan()
-//@Configuration
+@Configuration
+
+// Los componentes deben encontrarse dentro del paquete base de 'Application.Class' (main),
+//para que Spring pueda encontrarlos con la anotación @ComponentScan a secas.
+//Buscará anotaciones de componentes (@Controller, @Repository...)
+@ComponentScan
+
 @EnableJpaRepositories
 @Import(RepositoryRestMvcConfiguration.class)
 @EnableAutoConfiguration
@@ -36,22 +50,38 @@ public class Application {
     
     
     @Bean 
-    CommandLineRunner init(PersonRepository personRepository, AnimalRepository animalRepository) {
+    CommandLineRunner init(PersonRepository personRepository, AnimalRepository animalRepository, CustomerRepository customerRepository) {
 		return (evt) -> {
                     
+                                 // save a couple of customers
+                    customerRepository.save(new Customer("Elena", "Rodriguez"));
+                    customerRepository.save(new Customer("Tamara", "Ortencia"));
+                    customerRepository.save(new Customer("Jack", "Bauer"));
+                    customerRepository.save(new Customer("Chloe", "O'Brian"));
+                    customerRepository.save(new Customer("Kim", "Bauer"));
+                    customerRepository.save(new Customer("David", "Palmer"));
+                    customerRepository.save(new Customer("Michelle", "Dessler"));
+                    customerRepository.save(new Customer("Casandra", "Dresler"));
+                    customerRepository.save(new Customer("Figaro", "Dresler"));
                     
-                    Person p1=new Person("Susana", "Bauer",19);
-                    Person p2=new Person("Miriam", "Brian",19);
-                    Person p3=new Person("Elena", "Brian",27);
-                    Person p4=new Person("Sandra", "Bauer",27);
-                    Person p5=new Person("Elena", "Palmer",18);
+					
                     
-                    Animal a1=new Animal("Puskas", "cat", 2);
-                    Animal a2=new Animal("Dandil", "crocodile", 1);
-                    Animal a3=new Animal("Lassi", "dog", 5);
-                    Animal a4=new Animal("Donatello", "turtle",37);
-                    Animal a5=new Animal("Tweetie", "bird",18);
-                    Animal a6=new Animal("Rafael", "turtle",39);
+                    
+                    Person p1 = new Person("Susana", "Bauer",19);
+                    Person p2 = new Person("Miriam", "Brian",19);
+                    Person p3 = new Person("Elena", "Brian",27);
+                    Person p4 = new Person("Sandra", "Bauer",27);
+                    Person p5 = new Person("Elena", "Palmer",18);
+                    Person p6 = new Person("Mari","Megalodon", 34);
+                    
+                    Animal a1 = new Animal("Puskas", "cat", 2);
+                    Animal a2 = new Animal("Dandil", "crocodile", 1);
+                    Animal a3 = new Animal("Lassi", "dog", 5);
+                    Animal a4 = new Animal("Donatello", "turtle",37);
+                    Animal a5 = new Animal("Tweetie", "bird",18);
+                    Animal a6 = new Animal("Rafael", "turtle",39);
+                    Animal a7 = new Animal("Meg", "Megalodon",139);
+                    
                     
                     p5.addPet(a6);
                     a6.addOwner(p5);
@@ -67,6 +97,17 @@ public class Application {
                     a2.addOwner(p2);
                     p3.addPet(a3);
                     a3.addOwner(p3);
+                    p6.addPet(a7);
+                    a7.addOwner(p6);
+                    
+                    
+                    animalRepository.save(a1);
+                    animalRepository.save(a2);
+                    animalRepository.save(a3);
+                    animalRepository.save(a4);
+                    animalRepository.save(a5);
+                    animalRepository.save(a6);
+                    animalRepository.save(a7);
                     
                     
                     
@@ -75,17 +116,13 @@ public class Application {
                     personRepository.save(p3);
                     personRepository.save(p4);
                     personRepository.save(p5);
+                    personRepository.save(p6);
                     
                                         
-                    animalRepository.save(a1);
-                    animalRepository.save(a2);
-                    animalRepository.save(a3);
-                    animalRepository.save(a4);
-                    animalRepository.save(a5);
-                    animalRepository.save(a6);
                     
                     
-					
+                    
+        
 		};
     }
     

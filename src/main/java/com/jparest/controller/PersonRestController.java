@@ -8,11 +8,16 @@ http://localhost:8080/people/firstName/Susana/age/19
 http://localhost:8080/people/pets/1
 
  */
-package com.jparest.main;
+package com.jparest.controller;
 
-import com.jparest.main.UserNotFoundException;
+import com.jparest.repository.UserNotFoundException;
+import com.jparest.domain.Animal;
+import com.jparest.domain.Person;
+import com.jparest.repository.PersonRepository;
+import com.jparest.repository.AnimalRepository;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.repository.query.Param;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +30,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
 
 
 
@@ -68,15 +76,36 @@ public class PersonRestController {
         return personRepository.findByFirstNameIgnoreCase(name);
     }
     
-    @RequestMapping("/years/{years}")
-    public List<Person> getPersonByName (@PathVariable String years){
+    @RequestMapping("/optional_first_name/{name}")
+    public Person getPersonByOptionalFirstName (@PathVariable String name){
+        Optional <Person> optionalPerson = personRepository.findByFirstName(name);
+        return optionalPerson.orElseThrow(()-> new UserNotFoundException(name));
+    }
+    
+    @RequestMapping("/years/{years}") // http://localhost:8080/people/years/26
+    public List<Person> getPersonByYears(@PathVariable String years){
         return personRepository.findByYears(Integer.parseInt(years));
     }
+    
+    @RequestMapping("/years2/{years1}/{years2}")
+    public List<Person> getPersonByYears2(@PathVariable String years1, @PathVariable String years2){
+        // @Query("select u from Person u where u.age > ?1 and u.age < ?2")
+        return personRepository.findByYears2(Integer.parseInt(years1), Integer.parseInt(years2));
+    }
+    
+    @RequestMapping("/years3") // http://localhost:8080/people/years3?years=27
+    public List<Person> getPersonByYears3(@Param ("years") String years){
+        return personRepository.findByYears(Integer.parseInt(years));
+    }
+    
     
      @RequestMapping("/last_name/{last_name}")
     public List<Person> getPersonByLastName (@PathVariable String last_name){
         return personRepository.findByLastNameOrderByFirstNameAsc(last_name);
     }
+    
+    
+    
     
      @RequestMapping("/name/{id}")
     public String getPersonName (@PathVariable String id){
@@ -118,6 +147,16 @@ public class PersonRestController {
     }
     
     
+    @RequestMapping("savePerson/{firstName}/{lastName}")
+    public Person savePerson(@PathVariable String firstName, @PathVariable String lastName) {
+        
+        Person person = new Person (firstName, lastName);
+        personRepository.save(person);
+        
+        return person;
+    }
+    
+    
     private void validateUser(String userId) throws UserNotFoundException{
 	this.personRepository.findByIdPerson(userId)
                 
@@ -150,11 +189,16 @@ public class PersonRestController {
 
 	
     }
+    
+  
+    
     /*
     @RequestMapping(value="/put",method=RequestMethod.PUT)
     public Person addPerson(@RequestBody Person person){
         return personRepository.save(person);
     }
+    
+    
     
     */
 }

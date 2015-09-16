@@ -1,6 +1,5 @@
-package com.jparest.main;
+package com.jparest.domain;
 
-import com.jparest.main.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -16,22 +15,26 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+// ¡¡IMPORTANTE!!: Al mapear el nombre de la tabla y las columnas, las mayúsculas se ignoran y 
+// se convierten a minúsculas y convierte la convención de nombre 'camelCase' a separar por '_'
+// Ejemplo: FirstName -> first_name
 
 @Entity (name="Person")
-@Table(name="people")
+@Table(name="People") //  La tabla de la base de datos tendrá que llamarse people
 public class Person {
     
         private static int count=0;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name = "person_id")
+        @GeneratedValue(strategy=GenerationType.AUTO)
+        @Column(name = "person_id",unique = true, nullable = false)
 	private long id; 
         
         @Column(name = "idPerson")
         private String idPerson;
         
-        @Column(name = "firstName")
+        @Column(name = "firstName") // La columna de la tabla ‘people’ debera llamarse ‘first_name’
+
         private String firstName;
         
         @Column(name = "lastName")
@@ -63,7 +66,7 @@ public class Person {
             this();
             this.firstName = firstName;
             this.lastName = lastName;
-            this.age=age;
+            this.age = age;
         }   
 
         public long getId() {
