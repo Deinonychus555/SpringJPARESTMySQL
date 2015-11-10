@@ -16,12 +16,9 @@ Spring HATEOAS and Spring Data JPA and combines them together automatically.
 
 package com.jparest;
 
-import com.jparest.domain.Animal;
-import com.jparest.domain.Customer;
-import com.jparest.domain.Person;
-import com.jparest.repository.PersonRepository;
-import com.jparest.repository.AnimalRepository;
-import com.jparest.repository.CustomerRepository;
+import com.jparest.domain.*;
+import com.jparest.repository.*;
+
 
 import java.util.Arrays;
 import org.springframework.boot.CommandLineRunner;
@@ -48,7 +45,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 @EnableAutoConfiguration
 public class Application {
     
-    
+    /*
     @Bean 
     CommandLineRunner init(PersonRepository personRepository, AnimalRepository animalRepository, CustomerRepository customerRepository) {
 		return (evt) -> {
@@ -133,12 +130,26 @@ public class Application {
     return mc;
 }
     
-
+*/
 	public static void main(String[] args) {
             
             
             
-            SpringApplication.run(Application.class, args);
+            // SpringApplication.run(Application.class, args);
+            
+        ConfigurableApplicationContext context = SpringApplication.run(Application.class);
+        
+                
+        CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
+       
+        
+        // save a couple of customers
+        Customer customer = new Customer("Perico", "de los Palotes");
+   
+        customer.setShop("fnac");
+    
+        customerRepository.save(customer);
+        
             
             /*
             

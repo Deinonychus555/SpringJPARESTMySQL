@@ -62,7 +62,7 @@ RESTful endpoints at /animals.
 
 $ curl http://localhost:8080
 $ curl http://localhost:8080/animals
-$ curl -i -X POST -H "Content-Type:application/json" -d '{  "firstName" : "Frodo",  "lastName" : "Baggins" }' http://localhost:8080/animals
+$ curl -i -X POST -H "Content-Type:application/json" -d '{  "name" : "Beta",  "breed" : "dinosaur" }' http://localhost:8080/animals
 $ curl http://localhost:8080/animals/6
 $ curl http://localhost:8080/animals/search
 $ curl http://localhost:8080/animals/search/findByLastName?name=Baggins

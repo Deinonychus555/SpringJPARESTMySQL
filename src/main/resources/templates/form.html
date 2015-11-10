@@ -1,6 +1,7 @@
 <html>
     <body>
-        <form action="#" th:action="@{/web/form2}" th:object="${person}" method="post">
+        <p th:text="'Se ha accedido al formulario ' +  ${count} + ' veces'"/> 
+        <form action="#" th:action="@{/web/form}" th:object="${person}" method="post">
             <table>
                 <tr>
                     <td>First Name:</td>

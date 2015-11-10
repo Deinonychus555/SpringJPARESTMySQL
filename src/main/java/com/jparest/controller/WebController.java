@@ -3,6 +3,7 @@ package com.jparest.controller;
 // Validating Form Input 
 import com.jparest.domain.Person;
 import com.jparest.repository.PersonRepository;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.validation.Valid;
 // Validating Form Input 
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,15 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistrat
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.ui.Model;
 
 
 
 @Controller
 @RequestMapping("/web")
 public class WebController extends WebMvcConfigurerAdapter {
+    
+    AtomicLong counter = new AtomicLong();
     
     @Autowired
     private PersonRepository personRepository;
@@ -37,8 +41,11 @@ public class WebController extends WebMvcConfigurerAdapter {
     // The showForm method returns the form template. 
     // It includes a Person in its method signature so the template can associate 
     //form attributes with a Person.
-     @RequestMapping(value="/form2", method=RequestMethod.GET)
-    public String showForm(Person person) {
+     @RequestMapping(value="/form", method=RequestMethod.GET)
+    public String showForm(Person person, Model model) {
+        
+        int count =(int) counter.incrementAndGet();
+        model.addAttribute("count", count);
         return "form";
     }
     
@@ -47,7 +54,7 @@ public class WebController extends WebMvcConfigurerAdapter {
     //- A bindingResult object so you can test for and retrieve validation errors.
 
 
-    @RequestMapping(value="/form2", method=RequestMethod.POST)
+    @RequestMapping(value="/form", method=RequestMethod.POST)
     public String checkPersonInfo(Person person) {
         //System.out.println(person.toString());
         this.personRepository.save(person);
