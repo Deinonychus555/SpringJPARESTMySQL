@@ -1,8 +1,8 @@
-package com.jparest.controller;
+package com.jparest.main.controller;
 
 // Validating Form Input 
-import com.jparest.domain.Person;
-import com.jparest.repository.PersonRepository;
+import com.jparest.main.domain.Person;
+import com.jparest.main.repository.PersonRepository;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.validation.Valid;
 // Validating Form Input 

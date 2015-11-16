@@ -1,10 +1,10 @@
 
 
-package com.jparest.repository;
+package com.jparest.main.repository;
 
 
-import com.jparest.domain.Customer;
-import com.jparest.domain.Person;
+import com.jparest.main.domain.Customer;
+import com.jparest.main.domain.Person;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;

@@ -1,4 +1,4 @@
-package com.jparest.domain;
+package com.jparest.main.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

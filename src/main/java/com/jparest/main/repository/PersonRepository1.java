@@ -1,3 +1,6 @@
+package com.jparest.main.repository;
+
+/*
 package com.jparest.repository;
 
 import com.jparest.domain.Person;
@@ -22,11 +25,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 // All query method resources are exposed under the resource search
 // Ej: http://localhost:8181/people/search/findByLastName
 @Repository
-@RepositoryRestResource(collectionResourceRel = "people", path = "people")
-public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
-
-    
-       List<Person> findAll();
+@RepositoryRestResource(collectionResourceRel = "people1", path = "people1")
+public interface PersonRepository1 extends PagingAndSortingRepository<Person, Long> {
 
         @RestResource(path = "lastNames") // El path va en plural.
 	List<Person> findByLastNameOrderByFirstNameAsc(@Param("lastName") String lastName);
@@ -57,8 +57,9 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
         @RestResource(path="firstNames_lastNames", rel="firstNames_lastNames")
         List<Person> findByFirstNameAndLastNameAllIgnoreCase(@Param("firstName") String firstName, @Param("lastName") String lastName);
         
-        /** Te devuelve aquellas personas cuyo nombre y apellido coincidan con el dado */
-        @RestResource(path="firstNames_petNames", rel="firstNames_petNames")
+        //Te devuelve aquellas personas cuyo nombre y apellido coincidan con el dado 
+        
+@RestResource(path="firstNames_petNames", rel="firstNames_petNames")
         List<Person> findByFirstNameAndPetsName(@Param("firstName") String firstName, @Param("name") String name);
        
          List<Person> findByFirstNameAndAge(@Param("firstName")String firstName, @Param("age") int age);
@@ -114,6 +115,7 @@ $ curl -X DELETE http://localhost:8080/people/6
 */
 
     
-        
+   /*     
 
 }
+*/

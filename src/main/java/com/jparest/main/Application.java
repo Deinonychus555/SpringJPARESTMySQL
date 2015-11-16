@@ -14,10 +14,10 @@ Spring HATEOAS and Spring Data JPA and combines them together automatically.
 */
 
 
-package com.jparest;
+package com.jparest.main;
 
-import com.jparest.domain.*;
-import com.jparest.repository.*;
+import com.jparest.main.repository.CustomerRepository;
+import com.jparest.main.domain.Customer;
 
 
 import java.util.Arrays;

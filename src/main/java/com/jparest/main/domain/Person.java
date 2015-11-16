@@ -1,4 +1,4 @@
-package com.jparest.domain;
+package com.jparest.main.domain;
 
 import java.util.ArrayList;
 import java.util.List;

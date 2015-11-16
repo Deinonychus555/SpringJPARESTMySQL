@@ -8,14 +8,14 @@ http://localhost:8080/people/firstName/Susana/age/19
 http://localhost:8080/people/pets/1
 
  */
-package com.jparest.controller;
+package com.jparest.main.controller;
 
-import com.jparest.repository.UserNotFoundException;
-import com.jparest.domain.Animal;
-import com.jparest.domain.Customer;
-import com.jparest.domain.Person;
-import com.jparest.repository.CustomerRepository;
-import com.jparest.repository.AnimalRepository;
+import com.jparest.main.repository.UserNotFoundException;
+import com.jparest.main.domain.Animal;
+import com.jparest.main.domain.Customer;
+import com.jparest.main.domain.Person;
+import com.jparest.main.repository.CustomerRepository;
+import com.jparest.main.repository.AnimalRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.query.Param;

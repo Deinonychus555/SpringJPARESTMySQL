@@ -1,4 +1,4 @@
-package com.jparest.controller;
+package com.jparest.main.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
